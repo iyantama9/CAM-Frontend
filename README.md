@@ -1,46 +1,45 @@
-# CAM-Backend
+# CAM-Frontend (Cah Apik Messenger)
 
 <p align="center">
-  <a href="https://shields.io/">
-    <img src="https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" style="margin-right: 8px;" alt="TypeScript"/>
-  </a>
   <a href="https://shields.io/">
     <img src="https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" style="margin-right: 8px;" alt="React"/>
   </a>
   <a href="https://shields.io/">
     <img src="https://img.shields.io/badge/Vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white" style="margin-right: 8px;" alt="Vite"/>
   </a>
-  <a href="https://shields.io/">
-    <img src="https://img.shields.io/badge/ESLint-%234A154B.svg?style=for-the-badge&logo=eslint&logoColor=white" style="margin-right: 8px;" alt="ESLint"/>
+    <a href="https://shields.io/">
+    <img src="https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" style="margin-right: 8px;" alt="TypeScript"/>
   </a>
   <a href="https://shields.io/">
-    <img src="https://img.shields.io/badge/PostCSS-%23DD3A0A.svg?style=for-the-badge&logo=postcss&logoColor=white" style="margin-right: 8px;" alt="PostCSS"/>
+    <img src="https://img.shields.io/badge/Socket.io-%23010101.svg?style=for-the-badge&logo=socket.io&logoColor=white" style="margin-right: 8px;" alt="Socket.IO"/>
+  </a>
+  <a href="https://shields.io/">
+    <img src="https://img.shields.io/badge/Tailwind_CSS-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" style="margin-right: 8px;" alt="Tailwind CSS"/>
   </a>
 </p>
 
-CAM-Backend adalah server backend untuk aplikasi pesan real-time. Dibangun dengan Node.js, Express, dan TypeScript, serta menggunakan Socket.IO untuk komunikasi dua arah secara real-time dan MySQL untuk penyimpanan data.
+CAM-Frontend adalah antarmuka pengguna untuk aplikasi pesan real-time. Dibangun dengan React, Vite, dan TypeScript, aplikasi ini menyediakan UI yang modern dan responsif untuk berkomunikasi secara langsung dengan **CAM-Backend**.
 
 ## ✨ Fitur
 
-* **Autentikasi Pengguna**: Sistem registrasi dan login yang aman.
-* **Keamanan Kata Sandi**: Hashing kata sandi menggunakan `bcrypt` untuk keamanan.
-* **Pesan Real-Time**: Komunikasi instan antar klien menggunakan WebSockets dengan `Socket.IO`.
-* **Penyimpanan Pesan**: Riwayat obrolan disimpan secara persisten di database MySQL.
-* **Konfigurasi Fleksibel**: Pengaturan server dan database dikelola melalui variabel lingkungan (`.env`).
-* **CORS Support**: Konfigurasi CORS untuk mengizinkan koneksi dari berbagai domain frontend.
+* **Antarmuka Login & Registrasi**: Halaman untuk pengguna masuk atau mendaftar akun baru dengan aman.
+* **Chat Real-Time**: Mengirim dan menerima pesan secara instan menggunakan WebSockets melalui `Socket.IO`.
+* **Tampilan Pesan Dinamis**: Antarmuka obrolan yang memisahkan pesan dari pengguna yang sedang login dan pengguna lain.
+* **UI Modern & Animasi**: Dibangun dengan komponen dari **shadcn/ui**, **Tailwind CSS**, dan dianimasikan menggunakan **Framer Motion**.
+* **Latar Belakang Interaktif**: Latar belakang dinamis dengan partikel dan bintang yang merespons gerakan mouse.
+* **Desain Responsif**: Tampilan yang optimal di berbagai perangkat, dari desktop hingga mobile.
 
 ## 🛠️ Teknologi yang Digunakan
 
-* **Backend**: Node.js, Express.js
+* **Framework**: React.js
 * **Bahasa**: TypeScript
-* **Database**: MySQL
-* **Real-time Communication**: Socket.IO
-* **Dependencies**:
-    * `mysql2`: Klien MySQL untuk Node.js.
-    * `bcrypt`: Library untuk hashing kata sandi.
-    * `uuid`: Untuk membuat ID unik.
-    * `cors`: Middleware untuk mengaktifkan Cross-Origin Resource Sharing.
-    * `dotenv`: Untuk memuat variabel lingkungan dari file `.env`.
+* **Build Tool**: Vite
+* **Styling**: Tailwind CSS
+* **Komponen UI**: shadcn/ui (menggunakan Radix UI, clsx, tailwind-merge)
+* **Komunikasi Real-Time**: Socket.IO Client
+* **Animasi**: Framer Motion
+* **Ikon**: Lucide React
+* **Linting**: ESLint
 
 ## 🚀 Memulai
 
@@ -49,14 +48,14 @@ CAM-Backend adalah server backend untuk aplikasi pesan real-time. Dibangun denga
 Pastikan Anda telah menginstal perangkat lunak berikut:
 * [Node.js](https://nodejs.org/) (versi 18 atau lebih tinggi direkomendasikan)
 * [npm](https://www.npmjs.com/get-npm) (biasanya terinstal bersama Node.js)
-* Server [MySQL](https://www.mysql.com/downloads/)
+* Pastikan **CAM-Backend** sudah berjalan dan dapat diakses.
 
 ### Instalasi & Konfigurasi
 
 1.  **Clone repositori ini:**
     ```bash
     git clone <URL_REPOSITORI_ANDA>
-    cd CAM-Backend
+    cd cam-frontend
     ```
 
 2.  **Instal dependensi proyek:**
@@ -65,153 +64,39 @@ Pastikan Anda telah menginstal perangkat lunak berikut:
     ```
 
 3.  **Buat file `.env`:**
-    Buat file bernama `.env` di direktori utama proyek dan salin konten dari contoh di bawah. File ini digunakan untuk menyimpan kredensial dan konfigurasi sensitif.
+    Buat file bernama `.env` di direktori utama proyek dan salin konten dari contoh di bawah. File ini digunakan untuk menghubungkan frontend dengan backend dan untuk otentikasi.
 
     ```dotenv
-    # Server Configuration
-    PORT=3001
+    # .env.example
 
-    # Database Configuration
-    DB_HOST=localhost
-    DB_USER=root
-    DB_PASSWORD=password_database_anda
-    DB_DATABASE=nama_database_anda
-    DB_PORT=3306
+    # URL untuk API Server (Contoh: http://localhost:3001)
+    VITE_API_BASE_URL=http://localhost:3001
 
-    # Security & CORS
-    # Daftar domain yang diizinkan (pisahkan dengan koma jika lebih dari satu)
-    CORS_ORIGIN=http://localhost:3000,http://localhost:5173
-    # Kode otentikasi kustom untuk registrasi
-    AUTH_CODE=kode_rahasia_anda
+    # URL untuk Socket.IO Server (Contoh: ws://localhost:3001)
+    VITE_SOCKET_SERVER_URL=ws://localhost:3001
+    
+    # Kode otentikasi untuk registrasi (harus sama dengan AUTH_CODE di backend)
+    VITE_AUTH_CODE=kode_rahasia_anda
     ```
-
-4.  **Setup Database:**
-    * Pastikan server MySQL Anda berjalan.
-    * Buat database baru sesuai dengan nama yang Anda masukkan di `DB_DATABASE` pada file `.env`.
-    * Tabel `users` dan `messages` akan dibuat secara otomatis saat server pertama kali dijalankan.
 
 ### Menjalankan Aplikasi
 
 * **Mode Pengembangan (dengan hot-reload):**
-    Script ini menggunakan `nodemon` untuk secara otomatis me-restart server setiap kali ada perubahan file.
+    Script ini akan menjalankan aplikasi menggunakan server pengembangan Vite.
     ```bash
     npm run dev
     ```
 
-* **Mode Produksi:**
+* **Build untuk Produksi:**
+    Perintah ini akan membuat folder `dist` yang berisi file statis untuk production.
     ```bash
-    npm start
+    npm run build
     ```
 
-Server akan berjalan di alamat `http://localhost:` sesuai dengan `PORT` yang Anda tentukan di file `.env`.
-
-## 📝 API Endpoints
-
-Server menyediakan endpoint RESTful berikut untuk manajemen pengguna.
-
-### `POST /register`
-Mendaftarkan pengguna baru.
-
-* **Request Body**:
-    ```json
-    {
-      "username": "user_baru",
-      "email": "user@example.com",
-      "password": "password_aman",
-      "authCode": "kode_rahasia_anda"
-    }
+* **Preview Build Produksi:**
+    Menjalankan server lokal untuk meninjau hasil build dari folder `dist`.
+    ```bash
+    npm run preview
     ```
-* **Success Response (201 Created)**:
-    ```json
-    {
-      "message": "Pendaftaran berhasil",
-      "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-      "username": "user_baru"
-    }
-    ```
-* **Error Responses**:
-    * `400 Bad Request`: Jika `username`, `email`, atau `password` tidak diisi.
-    * `403 Forbidden`: Jika `authCode` salah.
-    * `409 Conflict`: Jika `username` atau `email` sudah terdaftar.
-    * `500 Internal Server Error`: Jika terjadi kesalahan di server.
 
-### `POST /login`
-Login pengguna yang sudah ada.
-
-* **Request Body**:
-    ```json
-    {
-      "username": "user_baru",
-      "password": "password_aman"
-    }
-    ```
-* **Success Response (200 OK)**:
-    ```json
-    {
-      "message": "Login berhasil",
-      "userId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-      "username": "user_baru"
-    }
-    ```
-* **Error Responses**:
-    * `400 Bad Request`: Jika `username` atau `password` tidak diisi.
-    * `401 Unauthorized`: Jika `password` salah.
-    * `404 Not Found`: Jika `username` tidak ditemukan.
-    * `500 Internal Server Error`: Jika terjadi kesalahan di server.
-
-
-## 🔌 Event Socket.IO
-
-Socket.IO digunakan untuk komunikasi real-time.
-
-### Event dari Klien ke Server
-
-* **`joinRoom({ userId: string })`**:
-    Klien mengirimkan event ini setelah berhasil login untuk bergabung ke dalam "room" pribadinya dan mulai menerima pesan. Server akan mengirimkan riwayat pesan awal setelah join berhasil.
-
-* **`leaveRoom({ userId: string })`**:
-    Klien mengirimkan event ini untuk keluar dari room (misalnya saat logout).
-
-* **`sendMessage(messageData, ack)`**:
-    Mengirim pesan baru ke server.
-    * `messageData` (objek): `{ userId: string, username: string, text: string }`
-    * `ack` (fungsi callback): Fungsi yang dipanggil oleh server untuk memberi konfirmasi bahwa pesan telah diterima dan diproses. Mengembalikan `{ success: boolean, message?: object, error?: string }`.
-
-### Event dari Server ke Klien
-
-* **`initialMessages(messages: Array<object>)`**:
-    Dikirim ke klien setelah `joinRoom` berhasil. Berisi array riwayat pesan yang diurutkan berdasarkan waktu.
-
-* **`message(message: object)`**:
-    Di-broadcast ke semua klien yang terhubung saat ada pesan baru masuk. Objek `message` memiliki format: `{ id, userId, username, text, timestamp }`.
-
-* **`serverError(error: string)`**:
-    Dikirim jika terjadi kesalahan di server saat klien mencoba mengambil data (misalnya, riwayat pesan).
-
-## 🗄️ Skema Database
-
-Server secara otomatis membuat dua tabel berikut jika belum ada.
-
-### Tabel `users`
-Menyimpan informasi pengguna.
-```sql
-CREATE TABLE IF NOT EXISTS users (
-    id VARCHAR(36) PRIMARY KEY,
-    username VARCHAR(255) NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-### Tabel `messages`
-Menyimpan data chat
-```sql
-CREATE TABLE IF NOT EXISTS messages (
-    id VARCHAR(36) PRIMARY KEY,
-    user_id VARCHAR(36) NOT NULL,
-    username VARCHAR(255) NOT NULL,
-    text TEXT NOT NULL,
-    timestamp BIGINT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-```
+Setelah menjalankan `npm run dev`, aplikasi frontend akan tersedia di `http://localhost:5173` atau port lain yang tersedia.
